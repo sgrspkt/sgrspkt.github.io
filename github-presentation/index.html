@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8" />
+    <title>Middleware pattern in PHP</title>
+    <meta name="description" content="A short presentation on Middleware pattern in PHP"/>
+    <meta name="author" content="Ujjwal Ojha" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/css/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/css/theme/sky.min.css" id="theme">
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/lib/css/zenburn.css">
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/css/print/' +
+                (window.location.search.match( /print-pdf/gi ) ? 'pdf.css' : 'paper.css');
+        document.getElementsByTagName( 'head' )[0].appendChild(link);
+    </script>
+    <style type="text/css">
+        .reveal section img {
+            border: 0;
+            background: none;
+            box-shadow: 0 0 #000;
+        }
+        .reveal section h2, .reveal section h3 {
+            text-transform: none;
+        }
+        .reveal pre {
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>Middleware pattern in PHP</h2>
+        </section>
+        <section>
+            <h2>
+                <a target="_black" href="http://twitter.com/ojhaujjwal" target="_blank">Ujjwal Ojha</a>
+            </h2>
+        </section>
+        <section>
+            <h2>
+                <img
+                        src="img/gh.svg"
+                        alt="Me on Github"
+                        height="70px"
+                        style="margin: 0;"
+                        />
+                <img
+                        src="img/twitter.svg"
+                        alt="Me on Twitter"
+                        height="70px"
+                        style="margin: 0;"
+                        />
+                <a target="_black" href="http://twitter.com/ojhaujjwal" target="_blank">ojhaujjwal</a>
+            </h2>
+        </section>
+		<section>
+			<h3>Agendas</h3>
+			<ul>			
+				<li>PSR-7</li>
+				<li class="fragment">Middleware pattern</li>
+				<li class="fragment">Zend Expressive project</li>
+			</ul>
+		</section>
+		<section>
+			<h3>PSR-7</h3>
+			<ul>
+                <li>Proposed by PHP FIG(Framework Interoperability Group)</li>
+				<li class="fragment">A standard which provides a set of common interfaces for reprensenting HTTP messages</li>
+                <li class="fragment">
+                    Interfaces defined in composer package <br/>
+                    <a href="https://packagist.org/packages/psr/http-message" target="_black">
+                        psr/http-message
+                    </a>
+                </li>
+			</ul>
+		</section>
+		<section>
+			<h3>HTTP Request</h3>
+			<pre>
+                <code>
+POST /path HTTP/1.1
+Host: example.com
+AnotherHeader: AnotherHeaderValue
+
+foo=bar&baz=bat
+                </code>
+			</pre>
+		</section>
+        <section>
+            <h3>HTTP Response</h3>
+			<pre>
+                <code>
+HTTP/1.1 200 OK
+Content-Type: text/plain
+AnotherHeader: AnotherHeaderValue
+
+This is the response body
+                </code>
+			</pre>
+        </section>
+        <section>
+            <h3>PSR-7 Interfaces</h3>
+            <ul>
+                <li>Psr\Http\Message\MessageInterface</li>
+                <li class="fragment">Psr\Http\Message\RequestInterface</li>
+                <li class="fragment">Psr\Http\Message\ResponseInterface</li>
+                <li class="fragment">Psr\Http\Message\ServerRequestInterface</li>
+                <li class="fragment">Psr\Http\Message\StreamInterface</li>
+                <li class="fragment">Psr\Http\Message\UploadedFileInterface</li>
+                <li class="fragment">Psr\Http\Message\UriInterface</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Value objects and Immutability</h3>
+            <ul>
+                <li>HTTP Messages and URIs are value objects</li>
+                <li class="fragment">Change to any aspect of the message is essentially a new message</li>
+                <li class="fragment">HTTP Messages and URIs which are value objects are immutable</li>
+            </ul>
+            <pre class="fragment">
+                <code class="php">
+$baseUri = new Uri('http://api.example.com');
+$baseRequest = new Request($baseUri, null, [
+    'Authorization' => 'Bearer ' . $token,
+    'Accept'        => 'application/json',
+]);;
+
+$uri = $baseUri->withPath('/user');
+$request = $baseRequest->withUri($uri)
+    ->withMethod('GET');
+                </code>
+            </pre>
+        </section>
+        <section>
+            <h3>Streams</h3>
+            <ul>
+                <li>MessageInterface uses a body value that must implement StreamInterface</li>
+                <li class="fragment">HTTP message may consume high memory for extremely large body</li>
+                <li class="fragment">StreamInterface API is based on Python's io module</li>
+            </ul>
+        </section>
+		<section>
+			<h3>Without PSR-7</h3>
+			<ul>
+				<li>Project will access superglobals directly</li>
+				<li class="fragment">Different libraries will have different implementations</li>
+				<li class="fragment">Libraries may depend on a specific implementation</li>
+				<li class="fragment">Different libraries may have multiple adapters for diffent http message implementation</li>
+			</ul>
+		</section>
+        <section>
+            <h3>PSR-7 Implementations</h3>
+            <ul>
+                <li>zendframework/zend-diactoros</li>
+                <li class="fragment">guzzlehttp/psr7(missing ServerRequestInterface and UploadedFileInterface)</li>
+                <li class="fragment">wandu/http</li>
+            </ul>
+            <p class="fragment">Implementations list available on <a target="_black" href="http://bit.ly/1OHQJHd">http://bit.ly/1OHQJHd</a></p>
+        </section>
+        <section>
+            <h3>Middleware pattern</h3>
+            <ul>
+                <li>A middleware is a piece of code which sits between request and response</li>
+                <li class="fragment">Middleware are functions that handle requests</li>
+                <li class="fragment">A middleware based application is a queue of middlewares</li>
+                <li class="fragment">
+                    A middleware can:
+                    <ul>
+                        <li>read incoming request</li>
+                        <li class="fragment">perform actions based on request</li>
+                        <li class="fragment">either complete the response or pass to the next middleware</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h3>Middleware signature</h3>
+            <pre>
+                <code>
+function (
+    Psr\Http\Message\ServerRequestInterface $request,
+    Psr\Http\Message\ResponseInterface $response,
+    callable $next = null
+) {
+
+}
+                </code>
+            </pre>
+        </section>
+        <section>
+            <h3>Sample application as queue of middlewares</h3>
+            <pre>
+                <code>
+$app = new MiddlewareRunner();
+$app->add(new Versioning());
+$app->add(new Router());
+$app->add(new Authentication());
+$app->add(new Options());
+$app->add(new Authorization());
+$app->add(new ContentNegotiation());
+$app->add(new ContentType());
+$app->add(new Dispatcher());
+$app->add(new ProblemHandler());
+$app->run($request, $response);
+                </code>
+            </pre>
+            <p class="fragment">You get to control the workflow of your application by deciding the order in which middleware is queued</p>
+        </section>
+        <section>
+            <h3>Middleware based modules</h3>
+            <pre>
+                <code>
+$app = new MiddlewareRunner();
+$app->add('/contact', new ContactFormMiddleware());
+$app->add('/forum', new ForumMiddleware());
+$app->add('/blog', new BlogMiddleware());
+$app->add('/store', new EcommerceMiddleware());
+$app->run($request, $response);
+                </code>
+            </pre>
+        </section>
+        <section>
+            <h3>Stratigility</h3>
+            <ul>
+                <li>a port of <a target="_black" href="https://github.com/senchalabs/connect">Sencha Connect</a> to PHP</li>
+                <li class="fragment">allows you to build applications out of middleware</li>
+            </ul>
+            <pre class="fragment">
+                <code>
+$app = new Zend\Stratigility\MiddlewarePipe();
+
+// Landing page
+$app->pipe('/', function ($req, $res, $next) {
+    if (! in_array($req->getUri()->getPath(), ['/', ''], true)) {
+        return $next($req, $res);
+    }
+    return $res->end('Hello world!');
+});
+
+// Another page
+$app->pipe('/foo', function ($req, $res, $next) {
+    return $res->end('FOO!');
+});
+                </code>
+            </pre>
+        </section>
+        <section>
+            <h3>Expressive</h3>
+            <ul>
+                <li>A minimalistic PSR-7 middleware framework</li>
+                <li class="fragment">Built on the top of Stratigility</li>
+                <li class="fragment">Latest release: 1.0.0rc5</li>
+                <li class="fragment">
+                    Composer package:
+                    <a target="_black" href="https://packagist.org/packages/zendframework/zend-expressive">
+                        zendframework/zend-expressive
+                    </a>
+                </li>
+            </ul>
+
+        </section>
+        <section>
+            <section>
+                <h3>Installing Expressive skeleton</h3>
+                <div>
+                    <img src="img/install-expressive-skeleton.png" alt="Expressive skelton installation">
+                </div>
+            </section>
+            <section>
+                <h3>Select Router</h3>
+                <div>
+                    <img src="img/select-router.png" alt="Select Router">
+                </div>
+            </section>
+            <section>
+                <h3>Select Container</h3>
+                <div>
+                    <img src="img/select-container.png" alt="Select Container">
+                </div>
+            </section>
+            <section>
+                <h3>Select Template Engine</h3>
+                <div>
+                    <img src="img/select-template-engine.png" alt="Select Template Engine">
+                </div>
+            </section>
+        </section>
+        <section>
+            <h3>Conclusion</h3>
+            <ul>
+                <li>Forget using superglobals and different http message representation components.
+
+                    Use PSR-7
+                </li>
+                <li class="fragment">Forget zf2 modules, symfony bundles. Use middlewares</li>
+                <li class="fragment">You can use Expressive to easily build PSR-7 based middleware applications.</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Thank You!</h2>
+        </section>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/lib/js/head.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/js/reveal.min.js"></script>
+<script type="text/javascript">
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        keyboard: {
+            39: 'next',
+            37: 'prev'
+        },
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+            { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+            { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/plugin/zoom-js/zoom.js', async: true },
+            { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/plugin/notes/notes.js', async: true }
+        ]
+    });
+
+</script>
+
+</body>
+</html>
