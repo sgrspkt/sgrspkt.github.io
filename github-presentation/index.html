@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8" />
-    <title>Middleware pattern in PHP</title>
+    <title>Best Practices with GIT/GITHUB</title>
     <meta name="description" content="A short presentation on Middleware pattern in PHP"/>
     <meta name="author" content="Ujjwal Ojha" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -39,11 +39,11 @@
 <div class="reveal">
     <div class="slides">
         <section>
-            <h2>Middleware pattern in PHP</h2>
+            <h2>Best Practices With Git/GitHub</h2>
         </section>
         <section>
             <h2>
-                <a target="_black" href="http://twitter.com/ojhaujjwal" target="_blank">Ujjwal Ojha</a>
+                <a target="_black" href="http://twitter.com/sgrspkt" target="_blank">Sagar Sapkota</a>
             </h2>
         </section>
         <section>
@@ -60,43 +60,136 @@
                         height="70px"
                         style="margin: 0;"
                         />
-                <a target="_black" href="http://twitter.com/ojhaujjwal" target="_blank">ojhaujjwal</a>
+                <a target="_black" href="http://twitter.com/sgrspkt" target="_blank">sgrspkt</a>
             </h2>
         </section>
+<section>
+            <h3>A bit history & Introduction</h3>
+            <ul>            
+                
+                <li class="fragment">Developed by Linus Torvalds in 2005</li>
+                <li class="fragment">Was developed first to maintain version control of Linux kernel</li>
+            </ul>
+            <ul>            
+                <li>GIT</li>
+                <li class="fragment">With distributed architecture, Git is an example of DVCS</li>
+                <li>GitHub</li>
+                <li class="fragment">Git repository hosting service</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Why Version Control Needed ??</h3>
+            <ul>            
+                
+                <li class="fragment">Work together and collaborate on a single project</li>
+                <li class="fragment">Revert files to previous state</li>
+                <li class="fragment">Revert entire project back to previous state</li>
+                <li class="fragment">Compare changes over time</li>
+                <li class="fragment">See who modified what ? And much more….</li>
+            </ul>
+            
+        </section>
+
 		<section>
 			<h3>Agendas</h3>
-			<ul>			
-				<li>PSR-7</li>
-				<li class="fragment">Middleware pattern</li>
-				<li class="fragment">Zend Expressive project</li>
+			<ul>	
+				<li class="fragment">Installing Git</li>
+				<li class="fragment">Introduction to Version Control</li>
+                <li class="fragment">Git Basics/li>
+                <li class="fragment">Creating a new local Git repository/li>
+                <li class="fragment">Cloning a Git repository</li>
+                <li class="fragment">Making use of Git commit history</li>
+                <li class="fragment">Reverting files to previous state</li>
+                <li class="fragment">Creating a Github Repository</li>
+                <li class="fragment">Adding, Committing & Pushing changes</li>
+                <li class="fragment">Branching</li>
+                <li class="fragment">Merging Branches</li>
+                <li class="fragment">Sending Pull Request</li>
+                <li class="fragment">Stashing</li>
 			</ul>
-		</section>
-		<section>
-			<h3>PSR-7</h3>
-			<ul>
-                <li>Proposed by PHP FIG(Framework Interoperability Group)</li>
-				<li class="fragment">A standard which provides a set of common interfaces for reprensenting HTTP messages</li>
-                <li class="fragment">
-                    Interfaces defined in composer package <br/>
-                    <a href="https://packagist.org/packages/psr/http-message" target="_black">
-                        psr/http-message
-                    </a>
-                </li>
-			</ul>
-		</section>
-		<section>
-			<h3>HTTP Request</h3>
-			<pre>
-                <code>
-POST /path HTTP/1.1
-Host: example.com
-AnotherHeader: AnotherHeaderValue
-
-foo=bar&baz=bat
-                </code>
-			</pre>
 		</section>
         <section>
+            <h3>Installing Git</h3>
+            <pre>
+                <code>
+git-scm.com/download/win
+git-scm.com/mac
+sudo apt-get install git (Ubuntu)
+sudo yum install git (Fedora)
+git --version
+                </code>
+            </pre>
+        </section>
+
+  <section>
+            <h3>First Time Git Setup</h3>
+            <pre>
+                <code>
+git config --global user.name "Sagar Sapkota"
+git config --global user.email "sagarsapkota@ebpearls.com"
+git config -- list  
+git config user.name 
+git help
+                </code>
+            </pre>
+        </section>
+        <section>
+            <h3>Git: The Big Picture</h3>
+            <h4>Use Cases:</h4>
+            <ul>    
+                <li class="fragment">Individual development</li>
+                <li class="fragment">Collaborative development</li>
+                <li class="fragment">Offline usage</li>
+                </ul>
+                <h4>Why Git ?</h4>
+                <ul>
+                <li class="fragment">Everything is local (full history tree available offline)</li>
+                <li class="fragment">Everything is fast</li>
+                <li class="fragment">Snapshots</li>
+                <li class="fragment">It is distributed not centralized</li>
+                
+            </ul>
+        </section>
+
+<section>
+            <h3>Git workflow: The three states</h3>
+           In a Git repository your file can reside in three main states:
+            <ul>    
+                <li class="fragment">Modified</li>
+                <li class="fragment">Staged</li>
+                <li class="fragment">Committed</li>
+                </ul>
+                What does this mean ??
+        </section>
+
+
+		<section>
+			<h3>Git Workflow</h3>
+			<img src="img/img1.png"/>
+			
+		</section>
+		<section>
+        <h3>Create a gihub repository</h3>
+			<img src="img/img2.png"/>
+		</section>
+        <section>
+            <img src="img/img3.png"/>
+        </section>
+
+<section>
+            <h3>Create a new repository</h3>
+           In a Git repository your file can reside in three main states:
+            <ul>    
+                <li class="fragment">
+Create a new directory, open it and perform a git init to create a new local git repository.</li>
+                <li class="fragment">Create a working copy of local repository through clonning</li>
+                <li class="fragment">Git clone <a target="_black" href="https://github.com/sgrspkt/laravel.git"></a></li>
+                </ul>
+            
+        </section>
+
+        <section>
+
             <h3>HTTP Response</h3>
 			<pre>
                 <code>
