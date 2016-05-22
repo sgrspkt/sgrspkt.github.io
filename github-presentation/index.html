@@ -69,15 +69,15 @@
         
 <section>
             <h3>A bit history & Introduction</h3>
-            <ul>            
+            <ul type="disc">            
                 
                 <li class="fragment">Developed by Linus Torvalds in 2005</li>
                 <li class="fragment">Was developed first to maintain version control of Linux kernel</li>
             </ul>
             <ul>            
-                <li>GIT</li>
+                <h4>GIT</h4>
                 <li class="fragment">With distributed architecture, Git is an example of DVCS</li>
-                <li>GitHub</li>
+                <h4>GitHub</h4>
                 <li class="fragment">Git repository hosting service</li>
             </ul>
         </section>
@@ -144,7 +144,9 @@ git help
                 <li class="fragment">Individual development</li>
                 <li class="fragment">Collaborative development</li>
                 <li class="fragment">Offline usage</li>
-                </ul>
+                </ul></br>
+                </section>
+                <section>
                 <h4>Why Git ?</h4>
                 <ul>
                 <li class="fragment">Everything is local (full history tree available offline)</li>
@@ -157,12 +159,13 @@ git help
 
 <section>
             <h3>Git workflow: The three states</h3>
-           In a Git repository your file can reside in three main states:
+           In a Git repository, file can reside in three main states:
             <ul>    
                 <li class="fragment">Modified</li>
                 <li class="fragment">Staged</li>
                 <li class="fragment">Committed</li>
                 </ul>
+                </br>
                 What does this mean ??
         </section>
 
@@ -173,7 +176,7 @@ git help
 			
 		</section>
 		<section>
-        <h3>Create a gihub repository</h3>
+        <h3>Create a github repository</h3>
 			<img src="img/img2.jpg"/>
 		</section>
         <section>
@@ -182,13 +185,14 @@ git help
 
 <section>
             <h3>Create a new repository</h3>
-           In a Git repository your file can reside in three main states:
-            <ul>    
-                <li class="fragment">
-Create a new directory, open it and perform a git init to create a new local git repository.</li>
-                <li class="fragment">Create a working copy of local repository through clonning</li>
-                <li class="fragment">Git clone <a target="_black" href="https://github.com/sgrspkt/laravel.git"></a></li>
-                </ul>
+            
+Create a new directory, open it and perform a git init to create a new local git repository.
+<pre><code>
+    git init
+</code></pre>
+                Create a working copy of local repository through clonning
+                <a target="_black" href="https://github.com/sgrspkt/laravel.git"><pre><code>Git clone https://github.com/sgrspkt/laravel.git</a></code></pre>
+                
             
         </section>
 
@@ -205,7 +209,7 @@ Create a new directory, open it and perform a git init to create a new local git
                 </pre>
                 </li>
             </ul>
-			<img src="img/snapshot.jpg">
+			<img src="img/snapshot.jpg" height="200px">
         </section>
         <section>
             Add new files to staging area
@@ -215,26 +219,26 @@ Create a new directory, open it and perform a git init to create a new local git
         git add .
     </code>
 </pre>
-<img src="img/add.jpg">
+<img src="img/add.jpg" height="200px" width="600px">
         </section>
 
 <section>
-<ul><li>Commit your changes</li></ul>
+Commit your changes
 <pre><code>git commit –m “commit message”</code></pre>
-<ul><li>You can directly add and commit </li></ul>
+You can directly add and commit
 <pre><code>git commit –a –m “commit message”</code></pre>
-<h3><i>“IT’S A STANDARD GIT PRACTICE TO ADD MESSAGE AS A COMMAND AND NOT IN PAST TENSE”</i></h3>
-<ul><li>
-If u want to remove the file from staging area but want to keep in working directory then use :</li></ul>
+<i>“IT’S A STANDARD GIT PRACTICE TO ADD MESSAGE AS A COMMAND AND NOT IN PAST TENSE”</i>
+</br>
+If u want to remove the file from staging area but want to keep in working directory then use :
 <pre><code>git rm –cached (file_name)</code></pre>
-<ul><li>Rename file. Changes test.txt file to test</li></ul>
+Rename file. Changes test.txt file to test
 <pre><code>git mv test.txt test</code></pre>
 </section>
 <section>
 <h3>Commit Message</h3>
 <ul><li><b>Master :-</b> You are in master branch [we see later on branching ] </li>
 <li><b>4544ec71 :-</b> Unique identifier that HEAD of commit holds</li></ul>
-<img src="img/commit.jpg">
+<img src="img/commit.jpg" height="200px">
 </section>
 <section>
 <h3>Get Git Commit History</h3>
@@ -246,7 +250,9 @@ You can see last ‘p’ number of commits
 
 You can also see git history with affected files [detailed]
 <pre><code>git log –stat</code></pre>
-
+</section>
+<section>
+<h3>Commit History Cont..</h3>
 Limit the commits to those made after the specified date.
 <pre><code>
 git log --since 1.days
@@ -257,8 +263,10 @@ To see a compressed log where each commit is one line
 
 </section>
 <section>
-    <img src="img/1day.jpg">
-    <img src="img/2day.jpg">
+    <img src="img/1day.jpg" height="350px" width="550px">
+    </section>
+    <section>
+    <img src="img/2day.jpg" height="350px" width="550px">
 </section>
 <section>
 <h3>Compare Changes Over Time</h3>
@@ -271,10 +279,10 @@ Compare two commits by
     <h3>Revert Files To Previous States</h3>
     Reset staged file
 <pre><code>git reset HEAD (file_name_that_was_staged)</code></pre>
-<img src="img/reset.jpg">
+<img src="img/reset.jpg" height="300px" width="700px">
 </section>
 <section>
-   <b>Commit Recover</b></br>
+   <h3>Commit Recover</h3></br>
 Wrong commit can be recovered, opens file in your configured text editor
 <pre><code>git commit –amend</code></pre>
 
@@ -331,7 +339,7 @@ Rename remote name
 <section>
     <h3>Branching</h3>
     Branches are used to develop features isolated from each other. The master branch is the “default” branch when you create a repository. Use other branches for development and merge them back to master branch upon completion.</br>
-<b>"Branches are just pointers to commits"</b>
+<b>"Branches are just pointers to commits."</b>
 <img src="img/branch.png">
 </section>
 <section>
@@ -363,12 +371,12 @@ Then merge branches by executing
 <section>
     <h3>Fork A Repo</h3>
     A fork is a copy of a repository. Forking a repository allows you to freely experiment with changes without affecting the original project.</br>
-<b>Propose changes to someone else's project</b>
+<h3>Purpose changes to someone else's project:</h3></br>
 <ul>
-<li>Fork the repository.</li>
-<li>Make the fix.</li>
-<li>Submit a pull request to the project owner.</li>
-<li>If the project owner likes your work, they might pull your fix into the original repository!</li>
+<li class="fragment">Fork the repository.</li>
+<li class="fragment">Make the fix.</li>
+<li class="fragment">Submit a pull request to the project owner.</li>
+<li class="fragment">If the project owner likes your work, they might pull your fix into the original repository!</li>
 </ul>
 
 </section>
@@ -445,8 +453,8 @@ Stash list will delete and is back to original stage
     </ul>
 </section>
 <section>
-    THANK YOU
-
+    <h3> THANK YOU !! </h3>
+</br>
 
     ANY QUESTIONS ??
 </section>
