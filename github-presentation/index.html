@@ -43,10 +43,8 @@
         </section>
         <section>
             <h2>
-                <a target="_black" href="http://twitter.com/sgrspkt" target="_blank">Sagar Sapkota</a>
-            </h2>
-        </section>
-        <section>
+                Sagar Sapkota
+            </h2></br>
             <h2>
                 <img
                         src="img/github.png"
@@ -65,10 +63,10 @@
                         alt="Me on Linkedin"
                         height="70px"
                         style="margin: 0;"
-                        />
-                <a target="_black" href="http://twitter.com/sgrspkt" target="_blank">sgrspkt</a>
+                        />/sgrspkt
             </h2>
         </section>
+        
 <section>
             <h3>A bit history & Introduction</h3>
             <ul>            
@@ -196,218 +194,263 @@ Create a new directory, open it and perform a git init to create a new local git
 
         <section>
 
-            <h3>HTTP Response</h3>
-			<pre>
-                <code>
-HTTP/1.1 200 OK
-Content-Type: text/plain
-AnotherHeader: AnotherHeaderValue
-
-This is the response body
-                </code>
-			</pre>
-        </section>
-        <section>
-            <h3>PSR-7 Interfaces</h3>
+            <h3>Basic Snapshotting</h3>
             <ul>
-                <li>Psr\Http\Message\MessageInterface</li>
-                <li class="fragment">Psr\Http\Message\RequestInterface</li>
-                <li class="fragment">Psr\Http\Message\ResponseInterface</li>
-                <li class="fragment">Psr\Http\Message\ServerRequestInterface</li>
-                <li class="fragment">Psr\Http\Message\StreamInterface</li>
-                <li class="fragment">Psr\Http\Message\UploadedFileInterface</li>
-                <li class="fragment">Psr\Http\Message\UriInterface</li>
-            </ul>
-        </section>
-        <section>
-            <h3>Value objects and Immutability</h3>
-            <ul>
-                <li>HTTP Messages and URIs are value objects</li>
-                <li class="fragment">Change to any aspect of the message is essentially a new message</li>
-                <li class="fragment">HTTP Messages and URIs which are value objects are immutable</li>
-            </ul>
-            <pre class="fragment">
-                <code class="php">
-$baseUri = new Uri('http://api.example.com');
-$baseRequest = new Request($baseUri, null, [
-    'Authorization' => 'Bearer ' . $token,
-    'Accept'        => 'application/json',
-]);;
-
-$uri = $baseUri->withPath('/user');
-$request = $baseRequest->withUri($uri)
-    ->withMethod('GET');
-                </code>
-            </pre>
-        </section>
-        <section>
-            <h3>Streams</h3>
-            <ul>
-                <li>MessageInterface uses a body value that must implement StreamInterface</li>
-                <li class="fragment">HTTP message may consume high memory for extremely large body</li>
-                <li class="fragment">StreamInterface API is based on Python's io module</li>
-            </ul>
-        </section>
-		<section>
-			<h3>Without PSR-7</h3>
-			<ul>
-				<li>Project will access superglobals directly</li>
-				<li class="fragment">Different libraries will have different implementations</li>
-				<li class="fragment">Libraries may depend on a specific implementation</li>
-				<li class="fragment">Different libraries may have multiple adapters for diffent http message implementation</li>
-			</ul>
-		</section>
-        <section>
-            <h3>PSR-7 Implementations</h3>
-            <ul>
-                <li>zendframework/zend-diactoros</li>
-                <li class="fragment">guzzlehttp/psr7(missing ServerRequestInterface and UploadedFileInterface)</li>
-                <li class="fragment">wandu/http</li>
-            </ul>
-            <p class="fragment">Implementations list available on <a target="_black" href="http://bit.ly/1OHQJHd">http://bit.ly/1OHQJHd</a></p>
-        </section>
-        <section>
-            <h3>Middleware pattern</h3>
-            <ul>
-                <li>A middleware is a piece of code which sits between request and response</li>
-                <li class="fragment">Middleware are functions that handle requests</li>
-                <li class="fragment">A middleware based application is a queue of middlewares</li>
-                <li class="fragment">
-                    A middleware can:
-                    <ul>
-                        <li>read incoming request</li>
-                        <li class="fragment">perform actions based on request</li>
-                        <li class="fragment">either complete the response or pass to the next middleware</li>
-                    </ul>
+                <li>To show summary of untracked, tracked, to be committed,  etc. files</li>
+                <li>Modify composer.json and type 
+                <pre>
+                    <code>
+                     git status
+                    </code>
+                </pre>
                 </li>
             </ul>
+			<img src="img/snapshot.jpg">
         </section>
         <section>
-            <h3>Middleware signature</h3>
-            <pre>
-                <code>
-function (
-    Psr\Http\Message\ServerRequestInterface $request,
-    Psr\Http\Message\ResponseInterface $response,
-    callable $next = null
-) {
+            Add new files to staging area
+<pre>
+    <code>
+        git add (filename)
+        git add .
+    </code>
+</pre>
+<img src="img/add.jpg">
+        </section>
 
-}
-                </code>
-            </pre>
-        </section>
-        <section>
-            <h3>Sample application as queue of middlewares</h3>
-            <pre>
-                <code>
-$app = new MiddlewareRunner();
-$app->add(new Versioning());
-$app->add(new Router());
-$app->add(new Authentication());
-$app->add(new Options());
-$app->add(new Authorization());
-$app->add(new ContentNegotiation());
-$app->add(new ContentType());
-$app->add(new Dispatcher());
-$app->add(new ProblemHandler());
-$app->run($request, $response);
-                </code>
-            </pre>
-            <p class="fragment">You get to control the workflow of your application by deciding the order in which middleware is queued</p>
-        </section>
-        <section>
-            <h3>Middleware based modules</h3>
-            <pre>
-                <code>
-$app = new MiddlewareRunner();
-$app->add('/contact', new ContactFormMiddleware());
-$app->add('/forum', new ForumMiddleware());
-$app->add('/blog', new BlogMiddleware());
-$app->add('/store', new EcommerceMiddleware());
-$app->run($request, $response);
-                </code>
-            </pre>
-        </section>
-        <section>
-            <h3>Stratigility</h3>
-            <ul>
-                <li>a port of <a target="_black" href="https://github.com/senchalabs/connect">Sencha Connect</a> to PHP</li>
-                <li class="fragment">allows you to build applications out of middleware</li>
-            </ul>
-            <pre class="fragment">
-                <code>
-$app = new Zend\Stratigility\MiddlewarePipe();
+<section>
+<ul><li>Commit your changes</li></ul>
+<pre><code>git commit –m “commit message”</code></pre>
+<ul><li>You can directly add and commit </li></ul>
+<pre><code>git commit –a –m “commit message”</code></pre>
+<h3><i>“IT’S A STANDARD GIT PRACTICE TO ADD MESSAGE AS A COMMAND AND NOT IN PAST TENSE”</i></h3>
+<ul><li>
+If u want to remove the file from staging area but want to keep in working directory then use :</li></ul>
+<pre><code>git rm –cached (file_name)</code></pre>
+<ul><li>Rename file. Changes test.txt file to test</li></ul>
+<pre><code>git mv test.txt test</code></pre>
+</section>
+<section>
+<h3>Commit Message</h3>
+<ul><li><b>Master :-</b> You are in master branch [we see later on branching ] </li>
+<li><b>4544ec71 :-</b> Unique identifier that HEAD of commit holds</li></ul>
+<img src="img/commit.jpg">
+</section>
+<section>
+<h3>Get Git Commit History</h3>
+You can study repository history using
+<pre><code>git log</code></pre>
 
-// Landing page
-$app->pipe('/', function ($req, $res, $next) {
-    if (! in_array($req->getUri()->getPath(), ['/', ''], true)) {
-        return $next($req, $res);
-    }
-    return $res->end('Hello world!');
-});
+You can see last ‘p’ number of commits
+<pre><code>git log –n p </code></pre>
 
-// Another page
-$app->pipe('/foo', function ($req, $res, $next) {
-    return $res->end('FOO!');
-});
-                </code>
-            </pre>
-        </section>
-        <section>
-            <h3>Expressive</h3>
-            <ul>
-                <li>A minimalistic PSR-7 middleware framework</li>
-                <li class="fragment">Built on the top of Stratigility</li>
-                <li class="fragment">Latest release: 1.0.0rc5</li>
-                <li class="fragment">
-                    Composer package:
-                    <a target="_black" href="https://packagist.org/packages/zendframework/zend-expressive">
-                        zendframework/zend-expressive
-                    </a>
-                </li>
-            </ul>
+You can also see git history with affected files [detailed]
+<pre><code>git log –stat</code></pre>
 
-        </section>
-        <section>
-            <section>
-                <h3>Installing Expressive skeleton</h3>
-                <div>
-                    <img src="img/install-expressive-skeleton.png" alt="Expressive skelton installation">
-                </div>
-            </section>
-            <section>
-                <h3>Select Router</h3>
-                <div>
-                    <img src="img/select-router.png" alt="Select Router">
-                </div>
-            </section>
-            <section>
-                <h3>Select Container</h3>
-                <div>
-                    <img src="img/select-container.png" alt="Select Container">
-                </div>
-            </section>
-            <section>
-                <h3>Select Template Engine</h3>
-                <div>
-                    <img src="img/select-template-engine.png" alt="Select Template Engine">
-                </div>
-            </section>
-        </section>
-        <section>
-            <h3>Conclusion</h3>
-            <ul>
-                <li>Forget using superglobals and different http message representation components.
+Limit the commits to those made after the specified date.
+<pre><code>
+git log --since 1.days
+Git log --after 1.days
+</code></pre>
+To see a compressed log where each commit is one line
+<pre><code>git log –pretty=oneline</code></pre>
 
-                    Use PSR-7
-                </li>
-                <li class="fragment">Forget zf2 modules, symfony bundles. Use middlewares</li>
-                <li class="fragment">You can use Expressive to easily build PSR-7 based middleware applications.</li>
-            </ul>
-        </section>
-        <section>
-            <h2>Thank You!</h2>
-        </section>
+</section>
+<section>
+    <img src="img/1day.jpg">
+    <img src="img/2day.jpg">
+</section>
+<section>
+<h3>Compare Changes Over Time</h3>
+See changes in a commit
+<pre><code>git show commitID</code></pre>
+Compare two commits by
+<pre><code>git diff commit1ID commit2ID</code></pre>
+</section>
+<section>
+    <h3>Revert Files To Previous States</h3>
+    Reset staged file
+<pre><code>git reset HEAD (file_name_that_was_staged)</code></pre>
+<img src="img/reset.jpg">
+</section>
+<section>
+   <b>Commit Recover</b></br>
+Wrong commit can be recovered, opens file in your configured text editor
+<pre><code>git commit –amend</code></pre>
+
+</section>
+<section>
+<h3>Pushing Changes</h3>
+To send changes to your remote repository execute
+<pre><code>git push origin master</code></pre>
+
+You can also push to a branch other than ‘master’
+<pre><code>git push origin branch_name</code></pre>
+</section>
+
+<section>
+<h3>BUT WAIT</h3>
+<ul type="none">
+<li>What Is Origin ?</li>
+<li>What Is Master ?</li>
+<li>What Is Branch ?</li>
+</ul>
+</section>
+
+<section>
+<h3>Origin</h3>
+When you clone a repository for the first time “Origin” is a default name given to the origin remote repository that you clone, from where you want to pull and push changes
+
+<pre><code>git clone /path/to/repository</code></pre>
+
+On initializing new repository
+
+<pre><code>git init
+git remote add origin /path/to/repository
+git remote add (remote_name)
+git remote remove (remote_name)
+</code></pre>
+</section>
+<section>
+    You can fetch from others remote and merge to your own
+<pre><code>git fetch (remote_name)</code></pre>
+
+Push skeleton
+<pre><code>git push (remote_name)(branch_name)</code></pre>
+
+View all remotes available
+<pre><code>git remote -v</code></pre>
+
+Want to know about remote
+<pre><code>git remote show (remote_name)</code></pre>
+
+Rename remote name
+<pre><code>git remote rename (old) (new)</code></pre>
+
+</section>
+<section>
+    <h3>Branching</h3>
+    Branches are used to develop features isolated from each other. The master branch is the “default” branch when you create a repository. Use other branches for development and merge them back to master branch upon completion.</br>
+<b>"Branches are just pointers to commits"</b>
+<img src="img/branch.png">
+</section>
+<section>
+    To create a new branch
+<pre><code>git branch (new_branch_name)</code></pre>
+
+Switch to a different branch
+<pre><code>git checkout (other_branch_name)</code></pre>
+
+To show all branches
+<pre><code>git branch</code></pre>
+
+To delete a branch (locally)
+<pre><code>git branch –d (branch_name)</code></pre>
+
+To delete a branch (remotely)
+<pre><code>git push origin --delete (branchName)</code></pre>
+
+</section>
+<section>
+    <h3>Merging Branches</h3>
+    Checkout the branch you want to update
+<pre><code>git checkout (branch_name)</code></pre>
+
+Then merge branches by executing
+<pre><code>git merge (this_branch_name) (that_branch_name)</code></pre>
+
+</section>
+<section>
+    <h3>Fork A Repo</h3>
+    A fork is a copy of a repository. Forking a repository allows you to freely experiment with changes without affecting the original project.</br>
+<b>Propose changes to someone else's project</b>
+<ul>
+<li>Fork the repository.</li>
+<li>Make the fix.</li>
+<li>Submit a pull request to the project owner.</li>
+<li>If the project owner likes your work, they might pull your fix into the original repository!</li>
+</ul>
+
+</section>
+<section>
+    <img src="img/fork.png">
+</section>
+<section>
+    <img src="img/fork1.png">
+</section>
+<section>
+You can now clone the repo and get all files and folders to your local directory.</br>
+    <img src="img/fork3.png">
+</section>
+<section>
+<h3>Add Collaborators</h3>
+    <img src="img/col1.jpg">
+    <img src="img/col2.jpg">
+</section>
+
+<section>
+<h3>Create Pull Request</h3>
+Create a pull request to propose and collaborate on changes to a repository.</br>
+
+<b>Steps involved :</b> 
+<ul>
+<li>On GitHub, navigate to the main page of the repository.</li>
+<li>To the right of the Branch menu, click New pull request.</li>
+</ul>
+<img src="img/pull.jpg">
+</section>
+<section>
+<ul>
+<li>The Compare page will automatically select the base and compare branches; to change these, click <b>Edit</b>.</li> 
+<li>On the Compare page, click <b>Create pull request.</b></li> 
+<li>Type a title and description for your pull request. </li>
+<li>Click <b>Create pull request.</b> </li>
+<img src="img/compare.jpg">
+</section>
+
+<section>
+   <h3>git aliases</h3>
+    Git alias is used so that we may not type the entire text of each of the Git commands</br>
+<pre><code>
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+git config --global alias.st status
+</code></pre>
+</section>
+<section>
+    <h3>git stash</h3>
+    <b>Why you use git stash ??</b>
+
+Save stash
+<pre><code>git stash save “appropriate message what you have worked on”</code></pre>
+
+Show stash list, Stash name is like this : stash@{0}
+<pre><code>git stash list</code></pre>
+
+This takes back to original but doesn’t delete stash
+<pre><code>git stash apply (stash_name)</code></pre>
+
+Stash list will delete and is back to original stage
+<pre><code>git stash pop</code></pre>
+
+</section>
+<section>
+    <h3>References</h3>
+    <ul>
+        <li>https://git-scm.com/docs/</li>
+<li>http://www.slideshare.net/akrish/introduction-to-gitgithub-a-beginners-guide
+</li>
+
+    </ul>
+</section>
+<section>
+    THANK YOU
+
+
+    ANY QUESTIONS ??
+</section>
+
     </div>
 </div>
 
