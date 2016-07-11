@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8" />
+    <title>Quiz App Presentation</title>
+    <meta name="description" content="A short presentation on best practices with git/github "/>
+    <meta name="author" content="Sagar Sapkota" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/css/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/css/theme/sky.min.css" id="theme">
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/lib/css/zenburn.css">
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/css/print/' +
+                (window.location.search.match( /print-pdf/gi ) ? 'pdf.css' : 'paper.css');
+        document.getElementsByTagName( 'head' )[0].appendChild(link);
+    </script>
+    <style type="text/css">
+        .reveal section img {
+            border: 0;
+            background: none;
+            box-shadow: 0 0 #000;
+        }
+        .reveal section h2, .reveal section h3 {
+            text-transform: none;
+        }
+        .reveal pre {
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>Presentation on Quiz Web App</h2>
+        </section>
+        <section>
+            <h2>
+                Sagar Sapkota
+            </h2></br>
+            <h2>
+                <img
+                        src="img/github.png"
+                        alt="Me on Github"
+                        height="70px"
+                        style="margin: 0;"
+                        />
+                /sgrspkt
+            </h2>
+        </section>
+        
+<section>
+            <h3>Introduction</h3>
+            <ul type="disc">            
+                
+                <li class="fragment">Web application developed in PHP 5.5, mySql 5.6 & Apache 2.5</li>
+                
+            </ul>
+            </section>
+            <section>
+            <ul>            
+                <h4>Objectives</h4>
+                <li class="fragment">To help an individual to enrich knowledge in various fields.</li>
+                <li class="fragment">Allows individual to register, login and play a quiz game.</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Overview of Quiz</h3>
+            <ul>            
+                
+                <li class="fragment">There are various areas of interest where an individual can select one of them at one time and play a game.
+</li>
+                <li class="fragment">Each interest field is provided with 10 multiple choice questions, when a individual chooses correct answer the score will be summed where full score will be 10. </li>
+                <li class="fragment">An individual is provided 60 seconds to solve all 10 questions.
+</li>
+                <li class="fragment">If he/she can’t solve within 60 seconds the game is terminated and cannot choose ‘next’ to play.
+</li>
+
+            </ul>
+            
+        </section>
+        <section>
+        <h3>Used technologies</h3>
+        <ul>
+            <h4><li class="fragment">JavaScript & jQuery</li></h4>
+            <ul>
+                <li class="fragment">For client side validations javascript and jQuery are used.</li>
+                <li class="fragment">A separate js file is created to contains js,jQuery and ajax calls. This also maintains maintainability of code.
+</li>
+            </ul>
+        <h4><li class="fragment">Ajax</li></h4>
+            <ul>
+                <li class="fragment">The jQuery’s $.ajax() function is extensively used to perform an asynchronous HTTP request with server in client side.</li>
+            </ul>
+        </ul>
+        </section>
+        <section>
+        <h3>Used technologies cont..</h3>
+        <ul>
+            <h4><li class="fragment">gitHub</li></h4>
+            <ul>
+                <li class="fragment">For a version control, log management and code quality review github is used.</li>
+                <li class="fragment"><a href="https://github.com/sgrspkt/quiz-app">https://github.com/sgrspkt/quiz-app</a></li>
+            </ul>
+            </ul>
+            </section>
+            <section>
+                <h3>ER diagram</h3>
+            <img src="img/er.PNG"/>
+            </section>
+            <section>
+                <h3>Schema Diagram</h3>
+            <img src="img/schema-diagram.PNG"/>
+            </section>
+            
+        <section>
+            <h3>Folder Structure</h3>
+            <img src="img/folder.JPG"/>
+        </section>
+		<section>
+			<h3>Glance to Frontend Tour</h3>
+        </section>
+		<section>
+        	<ul>
+            <h3>Registration Page</h3>	
+				<li class="fragment">Before participating a quiz, a user have to first register and login. To register one can directly click on the register menu to create an account.</li>
+                </ul>
+        </section>
+        <section>
+            
+            <ul>
+            <h3>Login Page</h3>  
+                <li class="fragment">When a quiz app loads, the user is directly redirected  to the login page, if the user is not logged in.</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Login Screen</h3>
+            <img src="img/login.JPG"/>
+            
+        </section>
+        <section>
+            
+            <ul>
+            <h3>User Home Page</h3>  
+                <li class="fragment">Home page is the landing page of the application from where a user can participate any quiz categories by clicking by choosing .</li>
+                <li class="fragment">On the home page, if the user is loggedin his name and profile is also shown and a logout link is provided to logout from the application.</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Login Screen</h3>
+            <img src="img/homepage.JPG"/>
+            
+        </section>
+         <section>
+            
+            <ul>
+            <h3>Quiz Screens</h3>  
+                <li class="fragment">
+On starting a quiz, a user is presented with the first question of the quiz with the next button.</li>
+<li class="fragment">Note that the previous button is not shown when the user is on first question and next button is not shown when the user is in the last question.</li>
+</ul>
+</section>
+           <section>
+            <h3>Quiz Screen pictorial</h3>
+            <img src="img/quiz_screen1.JPG"/>
+            
+        </section>
+        <section> 
+            <ul>
+            <h3>Quiz Screens Cont..</h3>  
+<li class="fragment">User can go back and forth to solve questions.</li>
+<li class="fragment">If user is not interested to play a quiz at middle of game, he/she can easily quit the game by clicking cross button onto the top right corner</li>
+<li class="fragment">To solve all 10 questions user is given a time period of 100 seconds</li>
+<li class="fragment">Remaining questions to be solved are also displayed with the current question number</li>
+            </ul>
+        </section>
+
+    <section>
+            <h3>Quiz Screen Pictorial</h3>
+            <img src="img/quiz_screen2.JPG"/>
+            
+        </section>
+        <section> 
+            <ul>
+            <h3>User Profile</h3>  
+<li class="fragment">After a quiz game is completed, User is redirected to their profile</li>
+<li class="fragment">Profile contains user's data with the total score he/she secured</li>
+            </ul>
+        </section>
+
+<section>
+            <h3>Profile Screen Pictorial</h3>
+            <img src="img/profile.JPG"/>
+            
+        </section>
+    <section>
+            <h3>Glance to Backend Tour</h3>
+        </section>
+        <section>
+         <ul>
+            <h3>Login Page</h3>  
+                <li class="fragment">admin can access the dashboard only after logging in to their account.</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Login Screen</h3>
+            <img src="img/login_admin.JPG"/>
+            
+        </section>
+         <section>
+         <ul>
+            <h3>Dashboard Page</h3>  
+                <li class="fragment">Dashboard page is the homepage for admin where admin have full access to: </li>
+                    <ul>
+                        <li class="fragment">Questions [CRUD]</li>
+                        <li class="fragment">Category [CRUD]</li>
+                        <li class="fragment">User Registrations</li>
+                        <li class="fragment">Scores</li>
+                    </ul>
+            </ul>
+        </section>
+        <section>
+            <h3>Dashboard Screen</h3>
+            <img src="img/dashboard.JPG"/>
+            
+        </section>
+        <section>
+         <ul>
+            <h3>Categories</h3>  
+                <li class="fragment">Admin can CRUD categories</li>
+        </ul>
+        </section>
+        <section>
+            <h3>Category Screen</h3>
+            <img src="img/add_category.JPG"/>
+        </section>
+        <section>
+            <h3>Category Screen cont.</h3>
+            <img src="img/view_categories.jpg">
+        </section>        
+        <section>
+         <ul>
+            <h3>Questions & Answers</h3>  
+                <li class="fragment">Admin can CRUD Questions & Answers</li>
+        </ul>
+        </section>
+        <section>
+            <h3>Questions & Answers Screen</h3>
+            <img src="img/add_questions.JPG"/>
+        </section>
+        <section>
+            <h3>Questions & Answers Screen cont.</h3>
+            <img src="img/view_questions.JPG">
+        </section>        
+        <section>
+         <ul>
+            <h3>Users Registered</h3>  
+                <li class="fragment">Admin can View Users that are registered</li>
+        </ul>
+        </section>
+        <section>
+            <h3>Users View</h3>
+            <img src="img/view_users.JPG"/>
+        </section>
+        <section>
+         <ul>
+            <h3>Score</h3>  
+                <li class="fragment">Admin can View Scores of users</li>
+        </ul>
+        </section>
+        <section>
+            <h3>Score View</h3>
+            <img src="img/view_score.JPG"/>
+        </section>
+        
+    <h3> THANK YOU , IT'S DEMO TIME !!</h3>
+    <h4>Happy Coding :)</h4>
+
+</section>
+
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/lib/js/head.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/js/reveal.min.js"></script>
+<script type="text/javascript">
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        keyboard: {
+            39: 'next',
+            37: 'prev'
+        },
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+            { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+            { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/plugin/zoom-js/zoom.js', async: true },
+            { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/plugin/notes/notes.js', async: true }
+        ]
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8" />
+    <title>Best Practices with GIT/GITHUB</title>
+    <meta name="description" content="A short presentation on best practices with git/github "/>
+    <meta name="author" content="Sagar Sapkota" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/css/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/css/theme/sky.min.css" id="theme">
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/lib/css/zenburn.css">
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/css/print/' +
+                (window.location.search.match( /print-pdf/gi ) ? 'pdf.css' : 'paper.css');
+        document.getElementsByTagName( 'head' )[0].appendChild(link);
+    </script>
+    <style type="text/css">
+        .reveal section img {
+            border: 0;
+            background: none;
+            box-shadow: 0 0 #000;
+        }
+        .reveal section h2, .reveal section h3 {
+            text-transform: none;
+        }
+        .reveal pre {
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>Presentation of Quiz App</h2>
+        </section>
+        <section>
+            <h2>
+                Sagar Sapkota
+            </h2></br>
+            <h2>
+                <img
+                        src="img/github.png"
+                        alt="Me on Github"
+                        height="70px"
+                        style="margin: 0;"
+                        />
+                /sgrspkt
+            </h2>
+        </section>
+        
+<section>
+            <h3>Introduction</h3>
+            <ul type="disc">            
+                
+                <li class="fragment">Web application developed in PHP 5.5,mySql 5.6</li>
+                
+            </ul>
+            </section>
+            <section>
+            <ul>            
+                <h4>Objectives</h4>
+                <li class="fragment">To help an individual to enrich knowledge in various fields.</li>
+                <li class="fragment">Allows individual to register, login and play a quiz game.</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Overview of Quiz</h3>
+            <ul>            
+                
+                <li class="fragment">There are various areas of interest where an individual can select one of them at one time and play a game.
+</li>
+                <li class="fragment">Each interest field is provided with 10 multiple choice questions, when a individual chooses correct answer the score will be summed where full score will be 10. </li>
+                <li class="fragment">An individual is provided 60 seconds to solve all 10 questions.
+</li>
+                <li class="fragment">If he/she can’t solve within 60 seconds the game is terminated and cannot choose ‘next’ to play.
+</li>
+
+            </ul>
+            
+        </section>
+        <section>
+        <h3>Used technologies</h3>
+        <ul>
+            <h4><li class="fragment">JavaScript & jQuery</li></h4>
+            <ul>
+                <li class="fragment">For client side validations javascript and jQuery are used.</li>
+                <li class="fragment">A separate js file is created to contains js,jQuery and ajax calls. This also maintains flexiblity of code.
+</li>
+            </ul>
+        <h4><li class="fragment">Ajax</li></h4>
+            <ul>
+                <li class="fragment">The jQuery’s $.ajax() function is extensively used to perform an asynchronous HTTP request with server in client side.</li>
+            </ul>
+        </ul>
+        </section>
+        <section>
+        <h3>Used technologies cont..</h3>
+        <ul>
+            <h4><li class="fragment">gitHub</li></h4>
+            <ul>
+                <li class="fragment">For a version control, log management and code quality review github is used.</li>
+                <li class="fragment"><a href="https://github.com/sgrspkt/quiz-app">https://github.com/sgrspkt/quiz-app</a></li>
+            </ul>
+            </ul>
+            </section>
+        <section>
+            <h3>Folder Structure</h3>
+            <img src="img/folder.JPG"/>
+            
+        </section>
+		<section>
+			<h3>Glance to Frontend Tour</h3>
+        </section>
+		<section>
+        	<ul>
+            <h3>Registration Page</h3>	
+				<li class="fragment">Before participating a quiz, a user have to first register and login. To register one can directly click on the register menu to create an account.</li>
+                </ul>
+        </section>
+        <section>
+            
+            <ul>
+            <h3>Login Page</h3>  
+                <li class="fragment">When a quiz app loads, the user is directly redirected  to the login page, if the user is not logged in.</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Login Screen</h3>
+            <img src="img/login.JPG"/>
+            
+        </section>
+        <section>
+            
+            <ul>
+            <h3>User Home Page</h3>  
+                <li class="fragment">Home page is the landing page of the application from where a user can participate any quiz categories by clicking by choosing .</li>
+                <li class="fragment">On the home page, if the user is loggedin his name and profile is also shown and a logout link is provided to logout from the application.</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Login Screen</h3>
+            <img src="img/homepage.JPG"/>
+            
+        </section>
+         <section>
+            
+            <ul>
+            <h3>Quiz Screens</h3>  
+                <li class="fragment">
+On starting a quiz, a user is presented with the first question of the quiz with the next button.</li>
+<li class="fragment">Note that the previous button is not shown when the user is on first question and next button is not shown when the user is in the last question.</li>
+</ul>
+</section>
+           <section>
+            <h3>Quiz Screen pictorial</h3>
+            <img src="img/quiz_screen1.JPG"/>
+            
+        </section>
+        <section> 
+            <ul>
+            <h3>Quiz Screens Cont..</h3>  
+<li class="fragment">User can go back and forth to solve questions.</li>
+<li class="fragment">If user is not interested to play a quiz at middle of game, he/she can easily quit the game by clicking cross button onto the top right corner</li>
+<li class="fragment">To solve all 10 questions user is given a time period of 100 seconds</li>
+<li class="fragment">Remaining questions to be solved are also displayed with the current question number</li>
+            </ul>
+        </section>
+
+<section>
+            <h3>Quiz Screen Pictorial</h3>
+            <img src="img/quiz_screen2.JPG"/>
+            
+        </section>
+        <section> 
+            <ul>
+            <h3>User Profile</h3>  
+<li class="fragment">After a quiz game is completed, User is redirected to their profile</li>
+<li class="fragment">Profile contains user's data with the total score he/she secured</li>
+            </ul>
+        </section>
+
+<section>
+            <h3>Profile Screen Pictorial</h3>
+            <img src="img/profile.JPG"/>
+            
+        </section>
+    <section>
+            <h3>Glance to Backend Tour</h3>
+        </section>
+        <section>
+         <ul>
+            <h3>Login Page</h3>  
+                <li class="fragment">admin can access the dashboard only after logging in to their account.</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Login Screen</h3>
+            <img src="img/login_admin.JPG"/>
+            
+        </section>
+         <section>
+         <ul>
+            <h3>Dashboard Page</h3>  
+                <li class="fragment">Dashboard page is the homepage for admin where admin have full access to: </li>
+                    <ul>
+                        <li class="fragment">Questions [CRUD]</li>
+                        <li class="fragment">Category [CRUD]</li>
+                        <li class="fragment">User Registrations</li>
+                        <li class="fragment">Scores</li>
+                    </ul>
+            </ul>
+        </section>
+        <section>
+            <h3>Dashboard Screen</h3>
+            <img src="img/dashboard.JPG"/>
+            
+        </section>
+        <section>
+         <ul>
+            <h3>Categories</h3>  
+                <li class="fragment">Admin can CRUD categories</li>
+        </ul>
+        </section>
+        <section>
+            <h3>Category Screen</h3>
+            <img src="img/add_category.JPG"/>
+        </section>
+        <section>
+            <h3>Category Screen cont.</h3>
+            <img src="img/view_categories.jpg">
+        </section>        
+        <section>
+         <ul>
+            <h3>Questions & Answers</h3>  
+                <li class="fragment">Admin can CRUD Questions & Answers</li>
+        </ul>
+        </section>
+        <section>
+            <h3>Questions & Answers Screen</h3>
+            <img src="img/add_questions.JPG"/>
+        </section>
+        <section>
+            <h3>Questions & Answers Screen cont.</h3>
+            <img src="img/view_questions.JPG">
+        </section>        
+        <section>
+         <ul>
+            <h3>Users Registered</h3>  
+                <li class="fragment">Admin can View Users that are registered</li>
+        </ul>
+        </section>
+        <section>
+            <h3>Users View</h3>
+            <img src="img/view_users.JPG"/>
+        </section>
+        <section>
+         <ul>
+            <h3>Score</h3>  
+                <li class="fragment">Admin can View Scores of users</li>
+        </ul>
+        </section>
+        <section>
+            <h3>Score View</h3>
+            <img src="img/view_score.JPG"/>
+        </section>
+        <section>
+            <h3>Installing Git</h3>
+            <pre>
+                <code>
+git-scm.com/download/win
+git-scm.com/mac
+sudo apt-get install git (Ubuntu)
+sudo yum install git (Fedora)
+git --version
+                </code>
+            </pre>
+        </section>
+
+  <section>
+            <h3>First Time Git Setup</h3>
+            <pre>
+                <code>
+git config --global user.name "Sagar Sapkota"
+git config --global user.email "sagarsapkota@ebpearls.com"
+git config --list  
+git config user.name 
+git help
+                </code>
+            </pre>
+        </section>
+        <section>
+            <h3>Git: The Big Picture</h3>
+            <h4>Use Cases:</h4>
+            <ul>    
+                <li class="fragment">Individual development</li>
+                <li class="fragment">Collaborative development</li>
+                <li class="fragment">Offline usage</li>
+                </ul></br>
+                </section>
+                <section>
+                <h4>Why Git ?</h4>
+                <ul>
+                <li class="fragment">Everything is local (full history tree available offline)</li>
+                <li class="fragment">Everything is fast</li>
+                <li class="fragment">Snapshots</li>
+                <li class="fragment">It is distributed not centralized</li>
+                
+            </ul>
+        </section>
+
+<section>
+            <h3>Git workflow: The three states</h3>
+           In a Git repository, file can reside in three main states:
+            <ul>    
+                <li class="fragment">Modified</li>
+                <li class="fragment">Staged</li>
+                <li class="fragment">Committed</li>
+                </ul>
+                </br>
+                What does this mean ??
+        </section>
+
+
+		<section>
+			<h3>Git Workflow</h3>
+			<img src="img/img1.png"/>
+			
+		</section>
+		<section>
+        <h3>Create a github repository</h3>
+			<img src="img/img2.jpg"/>
+		</section>
+        <section>
+            <img src="img/img3.jpg"/>
+        </section>
+
+<section>
+            <h3>Create a new repository</h3>
+            
+Create a new directory, open it and perform a git init to create a new local git repository.
+<pre><code>
+    git init
+</code></pre>
+                Create a working copy of local repository through clonning
+                <a target="_black" href="https://github.com/sgrspkt/laravel.git"><pre><code>Git clone https://github.com/sgrspkt/laravel.git</a></code></pre>
+                
+            
+        </section>
+
+        <section>
+
+            <h3>Basic Snapshotting</h3>
+            <ul>
+                <li>To show summary of untracked, tracked, to be committed,  etc. files</li>
+                <li>Modify composer.json and type 
+                <pre>
+                    <code>
+                     git status
+                    </code>
+                </pre>
+                </li>
+            </ul>
+			<img src="img/snapshot.jpg" height="200px">
+        </section>
+        <section>
+            Add new files to staging area
+<pre>
+    <code>
+        git add (filename)
+        git add .
+    </code>
+</pre>
+<img src="img/add.jpg" height="200px" width="600px">
+        </section>
+
+<section>
+Commit your changes
+<pre><code>git commit –m “commit message”</code></pre>
+You can directly add and commit
+<pre><code>git commit –a –m “commit message”</code></pre>
+<blockquote>it's a standard git practice to add message as a command and not in past tense</blockquote>
+</br>
+If u want to remove the file from staging area but want to keep in working directory then use :
+<pre><code>git rm --cached (file_name)</code></pre>
+Rename file. Changes test.txt file to test
+<pre><code>mv test.txt test</code></pre>
+</section>
+<section>
+<h3>Commit Message</h3>
+<ul><li><b>Master :-</b> You are in master branch [we see later on branching ] </li>
+<li><b>4544ec71 :-</b> Unique identifier that HEAD of commit holds</li></ul>
+<img src="img/commit.jpg" height="200px">
+</section>
+<section>
+<h3>Get Git Commit History</h3>
+You can study repository history using
+<pre><code>git log</code></pre>
+
+You can see last ‘n’ number of commits
+<pre><code>git log –n </code></pre>
+
+You can also see git history with affected files [detailed]
+<pre><code>git log --stat</code></pre>
+</section>
+<section>
+<h3>Commit History Cont..</h3>
+Limit the commits to those made after the specified date.
+<pre><code>
+git log --since 1.days
+Git log --after 1.days
+</code></pre>
+To see a compressed log where each commit is one line
+<pre><code>git log –pretty=oneline</code></pre>
+
+</section>
+<section>
+    <img src="img/1day.jpg" height="350px" width="550px">
+    </section>
+    <section>
+    <img src="img/2day.jpg" height="350px" width="550px">
+</section>
+<section>
+<h3>Compare Changes Over Time</h3>
+See changes in a commit
+<pre><code>git show commitID</code></pre>
+Compare two commits by
+<pre><code>git diff commit1ID commit2ID</code></pre>
+</section>
+<section>
+    <h3>Revert Files To Previous States</h3>
+    Reset staged file
+<pre><code>git reset HEAD (file_name_that_was_staged)</code></pre>
+<img src="img/reset.jpg" height="300px" width="700px">
+</section>
+<section>
+   <h3>Commit Recover</h3></br>
+Wrong commit can be recovered, opens file in your configured text editor
+<pre><code>git commit –amend</code></pre>
+
+</section>
+<section>
+<h3>Pushing Changes</h3>
+To send changes to your remote repository execute
+<pre><code>git push origin master</code></pre>
+
+You can also push to a branch other than ‘master’
+<pre><code>git push origin branch_name</code></pre>
+</section>
+
+<section>
+<h3>BUT WAIT</h3>
+<ul type="none">
+<li>What Is Origin ?</li>
+<li>What Is Master ?</li>
+<li>What Is Branch ?</li>
+</ul>
+</section>
+
+<section>
+<h3>Origin</h3>
+When you clone a repository for the first time “Origin” is a default name given to the origin remote repository that you clone, from where you want to pull and push changes
+
+<pre><code>git clone /path/to/repository</code></pre>
+
+On initializing new repository
+
+<pre><code>git init
+git remote add origin /path/to/repository
+git remote add (remote_name)
+git remote remove (remote_name)
+</code></pre>
+</section>
+<section>
+    You can fetch from others remote and merge to your own
+<pre><code>git fetch (remote_name)</code></pre>
+
+Push skeleton
+<pre><code>git push (remote_name)(branch_name)</code></pre>
+
+View all remotes available
+<pre><code>git remote -v</code></pre>
+
+Want to know about remote
+<pre><code>git remote show (remote_name)</code></pre>
+
+Rename remote name
+<pre><code>git remote rename (old) (new)</code></pre>
+
+</section>
+<section>
+    <h3>Branching</h3>
+    Branches are used to develop features isolated from each other. The master branch is the “default” branch when you create a repository. Use other branches for development and merge them back to master branch upon completion.</br>
+<b>"Branches are just pointers to commits."</b>
+<img src="img/branch.png">
+</section>
+<section>
+    To create a new branch
+<pre><code>git branch (new_branch_name)</code></pre>
+
+Switch to a different branch
+<pre><code>git checkout (other_branch_name)</code></pre>
+
+To show all branches
+<pre><code>git branch</code></pre>
+
+To delete a branch (locally)
+<pre><code>git branch –d (branch_name)</code></pre>
+
+To delete a branch (remotely)
+<pre><code>git push origin --delete (branchName)</code></pre>
+
+</section>
+<section>
+    <h3>Merging Branches</h3>
+    Checkout the branch you want to update
+<pre><code>git checkout (branch_name)</code></pre>
+
+Then merge branches by executing
+<pre><code>git merge (this_branch_name) (that_branch_name)</code></pre>
+
+</section>
+<section>
+    <h3>Fork A Repo</h3>
+    A fork is a copy of a repository. Forking a repository allows you to freely experiment with changes without affecting the original project.</br>
+<h3>Purpose changes to someone else's project:</h3></br>
+<ul>
+<li class="fragment">Fork the repository.</li>
+<li class="fragment">Make the fix.</li>
+<li class="fragment">Submit a pull request to the project owner.</li>
+<li class="fragment">If the project owner likes your work, they might pull your fix into the original repository!</li>
+</ul>
+
+</section>
+<section>
+    <img src="img/fork.png">
+</section>
+<section>
+    <img src="img/fork1.png">
+</section>
+<section>
+You can now clone the repo and get all files and folders to your local directory.</br>
+    <img src="img/fork3.png">
+</section>
+<section>
+<h3>Add Collaborators</h3>
+    <img src="img/col1.jpg">
+    <img src="img/col2.jpg">
+</section>
+
+<section>
+<h3>Create Pull Request</h3>
+Create a pull request to propose and collaborate on changes to a repository.</br>
+
+<b>Steps involved :</b> 
+<ul>
+<li>On GitHub, navigate to the main page of the repository.</li>
+<li>To the right of the Branch menu, click New pull request.</li>
+</ul>
+<img src="img/pull.jpg">
+</section>
+<section>
+<ul>
+<li>The Compare page will automatically select the base and compare branches; to change these, click <b>Edit</b>.</li> 
+<li>On the Compare page, click <b>Create pull request.</b></li> 
+<li>Type a title and description for your pull request. </li>
+<li>Click <b>Create pull request.</b> </li>
+<img src="img/compare.jpg">
+</section>
+
+<section>
+   <h3>git aliases</h3>
+    Git alias is used so that we may not type the entire text of each of the Git commands</br>
+<pre><code>
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+git config --global alias.st status
+</code></pre>
+</section>
+<section>
+    <h3>git stash</h3>
+    <b>Why you use git stash ??</b></br>
+
+Save stash
+<pre><code>git stash save “appropriate message what you have worked on”</code></pre>
+
+Show stash list, Stash name is like this : stash@{0}
+<pre><code>git stash list</code></pre>
+
+This takes back to original but doesn’t delete stash
+<pre><code>git stash apply (stash_name)</code></pre>
+
+This deletes the stash 
+<pre><code>git stash drop (stash_name)</code></pre>
+
+Stash list will delete and is back to original stage
+<pre><code>git stash pop</code></pre>
+
+</section>
+
+<section>
+    <h3>GitHub Pages and Slides</h3>
+    Github pages can be created by creating github repo as.
+<pre><code>
+    username.github.io
+</code></pre></br>
+index.html behaves as homepage </br>
+Eg : <a href="http://sgrspkt.github.io">sgrspkt.github.io</a>
+</section>
+<section>
+<h3>Github slides</h3>
+For attractive github slides</br>
+clone reveal.js to your directory which is HTML Presentation Framework </br></br>
+    <a href="http://http://lab.hakim.se/reveal-js/#/">Check out the live demo.</a></br></br>
+    github link : <a href="https://github.com/hakimel/reveal.js/">https://github.com/hakimel/reveal.js/</a></br>
+
+OR </br>
+integrate cdn from <a href="https://cdnjs.com/libraries/foundation">https://cdnjs.com/libraries/foundation</a>
+</section>
+<section>
+    <h3>References</h3>
+    <ul>
+        <li><a href="https://git-scm.com/docs/">https://git-scm.com/docs/</a></li>
+<li><a href="http://www.slideshare.net/akrish/introduction-to-gitgithub-a-beginners-guide">http://www.slideshare.net/akrish/introduction-to-gitgithub-a-beginners-guide</a>
+</li>
+
+    </ul>
+</section>
+<section>
+    <h3> THANK YOU !! </h3>
+</br>
+
+    ANY QUESTIONS ??
+</section>
+
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/lib/js/head.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/js/reveal.min.js"></script>
+<script type="text/javascript">
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        keyboard: {
+            39: 'next',
+            37: 'prev'
+        },
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+            { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+            { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/plugin/zoom-js/zoom.js', async: true },
+            { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/plugin/notes/notes.js', async: true }
+        ]
+    });
+
+</script>
+
+</body>
+</html>
